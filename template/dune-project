@@ -1,0 +1,28 @@
+(lang dune 2.7)
+
+(name {{ project_slug }})
+
+{% if github_username %}(documentation "https://{{ github_username }}.github.io/{{ project_slug }}/"){% endif %}
+
+{% if github_username %}(source
+ (github {{ github_username }}/{{ project_slug }})){% endif %}
+
+(license ISC)
+
+(authors
+  "{{ author_name }}{% if author_email %} <{{ author_email }}>{% endif %}")
+
+(maintainers
+  "{{ author_name }}{% if author_email %} <{{ author_email }}>{% endif %}")
+
+(generate_opam_files true)
+
+(package
+ (name {{ project_slug }})
+ (synopsis "{{ project_description }}")
+ (description "{{ project_description }}")
+ (depends
+  (dream
+   (>= 1.0.0~alpha4))
+  (crunch :build)
+  (tailwindcss :build)))

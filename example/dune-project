@@ -1,0 +1,28 @@
+(lang dune 2.7)
+
+(name demo)
+
+(documentation "https://tmattio.github.io/demo/")
+
+(source
+ (github tmattio/demo))
+
+(license ISC)
+
+(authors
+  "Thibaut Mattio")
+
+(maintainers
+  "Thibaut Mattio")
+
+(generate_opam_files true)
+
+(package
+ (name demo)
+ (synopsis "A short, but powerful statement about your project")
+ (description "A short, but powerful statement about your project")
+ (depends
+  (dream
+   (>= 1.0.0~alpha4))
+  (crunch :build)
+  (tailwindcss :build)))

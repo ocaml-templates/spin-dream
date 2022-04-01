@@ -1,0 +1,17 @@
+(subdir
+ asset/css/
+ (rule
+  (target main.css)
+  (deps
+   (source_tree %{workspace_root}/template))
+  (action
+   (chdir
+    %{workspace_root}
+    (run
+     tailwindcss
+     -c
+     tailwind.config.js
+     --content
+     template/*.eml
+     -o
+     %{target})))))

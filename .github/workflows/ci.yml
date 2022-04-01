@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Prime the caches every Monday
+    - cron: 0 1 * * MON
+
+jobs:
+  build:
+    name: Generate project
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    env:
+      SPIN_PROJECT_NAME: Demo
+      SPIN_CREATE_SWITCH: false
+      SPIN_AUTHOR_NAME: Jonh Doe
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use OCaml ocaml-base-compiler.4.13.1
+        uses: ocaml/setup-ocaml@master
+        with:
+          ocaml-compiler: ocaml-base-compiler.4.13.1
+
+      - run: opam install spin
+
+      - run: opam exec -- spin new . _generated -d -vv
+
+      - run: make test
+        working-directory: _generated

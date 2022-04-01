@@ -1,0 +1,14 @@
+(executable
+ (name main)
+ (libraries dream template))
+
+(rule
+ (targets asset.ml)
+ (deps
+  %{workspace_root}/asset/css/main.css
+  (source_tree %{workspace_root}/asset)
+  (source_tree %{workspace_root}/template))
+ (action
+  (with-stdout-to
+   %{null}
+   (run %{bin:ocaml-crunch} -m plain -o asset.ml %{workspace_root}/asset))))

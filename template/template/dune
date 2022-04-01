@@ -1,0 +1,21 @@
+(library
+ (name template)
+ (libraries dream))
+
+(rule
+ (targets homepage.ml)
+ (deps homepage.eml)
+ (action
+  (run %{bin:dream_eml} %{deps} --workspace %{workspace_root})))
+
+(rule
+ (targets layout.ml)
+ (deps layout.eml)
+ (action
+  (run %{bin:dream_eml} %{deps} --workspace %{workspace_root})))
+
+(rule
+ (targets not_found.ml)
+ (deps not_found.eml)
+ (action
+  (run %{bin:dream_eml} %{deps} --workspace %{workspace_root})))
